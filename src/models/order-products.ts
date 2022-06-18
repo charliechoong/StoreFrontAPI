@@ -19,7 +19,7 @@ export class OrderProductsStore {
         }
     }
 
-    async indexOrder(oid: string): Promise<OrderProduct[]> {
+    async indexOrderId(oid: string): Promise<OrderProduct[]> {
         try {
             const sql = 'SELECT * FROM order_products WHERE order_id=($1)'
             const conn = await client.connect()
