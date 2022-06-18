@@ -5,38 +5,37 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
+- Get all products: '/products' [GET]
+- Get the details of a product: '/products/:product_id' [GET]
+- Create a new product: '/products/create' [POST] [token required]
 - [OPTIONAL] Top 5 most popular products 
 - [OPTIONAL] Products by category (args: product category)
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Get all users: '/users' [GET] [token required]
+- Get details of a user: '/users/:user_id' [GET] [token required]
+- Create a new user: '/users/create' [POST] [token required]
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Get the current order of a user: '/orders/:user_id' [GET] [token required]
+- [OPTIONAL] Completed Orders by user (args: user id) [token required]
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
+- **id** : serial (primary key)
+- **name** : varchar(100)
+- **price** : numeric
 - [OPTIONAL] category
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- **id** : serial (primary key)
+- **firstName** : varchar(50)
+- **lastName** : varchar(50)
+- **password** : varchar(100)
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
-
+- **id** : serial (primary key)
+- **id of each product in the order** : integer[] (array of foreign keys to **Product**)
+- **quantity of each product in the order** : integer[] 
+- **user_id** : integer (foreign key to **User**)
+- **status of order** : varchar(50) (**Possible Values**: "active", "complete")
