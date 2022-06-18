@@ -21,13 +21,13 @@ These are the notes from a meeting with the frontend developer that describe wha
 - [OPTIONAL] Completed Orders by user (args: user id) [token required]
 
 ## Data Shapes
-#### Product
+#### Products
 - **id** : serial (primary key)
 - **name** : varchar(100)
 - **price** : numeric
 - [OPTIONAL] category
 
-#### User
+#### Users
 - **id** : serial (primary key)
 - **firstName** : varchar(50)
 - **lastName** : varchar(50)
@@ -35,7 +35,11 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 - **id** : serial (primary key)
-- **id of each product in the order** : integer[] (array of foreign keys to **Product**)
-- **quantity of each product in the order** : integer[] 
 - **user_id** : integer (foreign key to **User**)
 - **status of order** : varchar(50) (**Possible Values**: "active", "complete")
+
+#### Order-Products
+- **id** : serial (primary key)
+- **order_id** : integer (foreign key to **Orders**)
+- **product_id** : integer (foreign key to **Products**)
+- **quantity** : integer
