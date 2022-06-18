@@ -18,6 +18,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 - Get the current order of a user: '/orders/:user_id' [GET] [token required]
+- Create a new order: '/orders/' [POST] [token required]
+- Add product to order: '/orders/:id/products' [POST] [token required]
 - [OPTIONAL] Completed Orders by user (args: user id) [token required]
 
 ## Data Shapes
