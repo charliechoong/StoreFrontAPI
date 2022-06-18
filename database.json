@@ -2,7 +2,14 @@
     "dev": {
         "driver": "pg",
         "host": "127.0.0.1",
-        "database": "happy_tummy",
+        "database": "happytummy",
+        "user": "charliechoong",
+        "password": "ilovefood"
+    },
+    "test": {
+        "driver": "pg",
+        "host": "127.0.0.1",
+        "database": "happytummy_test",
         "user": "charliechoong",
         "password": "ilovefood"
     }

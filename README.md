@@ -20,10 +20,11 @@ Your application must make use of the following libraries:
 4. install dotenv & db-migrate
 Connect to container on CLI: docker exec -it happy-tummy bash
 We have root access now
-su postgres -> psql 
+su postgres -> psql OR psql -U  postgres (windows)
 - create database, eg. CREATE DATABASE happytummy;
 - create user/pass eg.  CREATE USER charliechoong WITH PASSWORD 'ilovefood';
 - grant privileges to user eg. GRANT ALL PRIVILEGES ON DATABASE happytummy to charliechoong;
+
 Migration
 - npm install -g yarn
 - npm install -g db-migrate db-migrate-pg
@@ -64,7 +65,7 @@ Set up the Express handlers to route incoming requests to the correct model meth
 
 ### 5. JWTs
 
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
+Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIREMENTS.md`.
 
 ### 6. QA and `README.md`
 
