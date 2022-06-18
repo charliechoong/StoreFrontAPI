@@ -7,16 +7,16 @@ dotenv.config()
 const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env
 
 export type User = {
-    id: number;
     firstName: string;
     lastName: string;
     password_raw: string;
 }
 
-export class Users {
+export class UserStore {
     
     async index(): Promise<User[]> {
         try {
+            //@ts-ignore
             const conn = await client.connect()
             const sql = 'SELECT * FROM users'
             const result = await conn.query(sql)
@@ -30,6 +30,7 @@ export class Users {
 
     async show(id: string): Promise<User> {
         try {
+            //@ts-ignore
             const conn = await client.connect();
             const sql = 'SELECT * FROM users WHERE id=($1)'
             const result = await conn.query(sql, [id])
@@ -44,14 +45,14 @@ export class Users {
     async create(u: User): Promise<User> {
         try {
             dotenv.config()
-            
+            // @ts-ignore
             const conn = await client.connect()
             const sql = 'INSERT INTO users (firstName, lastName, password) VALUES(($1), ($2), ($3)) RETURNING *'
 
             const password_hash = bcrypt.hashSync(u.password_raw + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS||"1"))
-            const result = conn.query(sql, [u.firstName, u.lastName, password_hash])
+            const result = await conn.query(sql, [u.firstName, u.lastName, password_hash])
             conn.release()
-            return (await result).rows[0]
+            return result.rows[0]
         } catch (err) {
             throw new Error(`Could not create user ${u.firstName}. Error: ${err}`)
         }

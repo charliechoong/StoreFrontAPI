@@ -6,7 +6,7 @@ export type OrderProduct = {
     order_id: string;
     product_id: string;
 }
-export class OrderProductsStore {
+export class OrderProductStore {
     async index(): Promise<OrderProduct[]> {
         try {
             const sql = 'SELECT * FROM order_products'

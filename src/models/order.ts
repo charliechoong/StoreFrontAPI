@@ -7,7 +7,7 @@ export type Order = {
     status: string;
 }
 
-export class Orders {
+export class OrderStore {
     async show(id: string): Promise<Order> {
         try {
             const sql = 'SELECT * FROM orders WHERE id=($1)'

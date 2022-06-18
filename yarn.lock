@@ -78,7 +78,7 @@
   "resolved" "https://registry.npmjs.org/@types/node/-/node-18.0.0.tgz"
   "version" "18.0.0"
 
-"@types/pg@^7.14.7":
+"@types/pg@^7.14.11":
   "integrity" "sha512-EnZkZ1OMw9DvNfQkn2MTJrwKmhJYDEs5ujWrPfvseWNoI95N8B4HzU/Ltrq5ZfYxDX/Zg8mTzwr6UAyTjjFvXA=="
   "resolved" "https://registry.npmjs.org/@types/pg/-/pg-7.14.11.tgz"
   "version" "7.14.11"
@@ -1065,7 +1065,7 @@
     "postgres-date" "~1.0.4"
     "postgres-interval" "^1.1.0"
 
-"pg@^8.0.3", "pg@^8.5.1", "pg@>=8.0":
+"pg@^8.0.3", "pg@^8.7.3", "pg@>=8.0":
   "integrity" "sha512-HPmH4GH4H3AOprDJOazoIcpI49XFsHCe8xlrjHkWiapdbHK+HLtbm/GQzXYAZwmPju/kzKhjaSfMACG+8cgJcw=="
   "resolved" "https://registry.npmjs.org/pg/-/pg-8.7.3.tgz"
   "version" "8.7.3"

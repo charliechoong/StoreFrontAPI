@@ -7,7 +7,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Products
 - Get all products: '/products' [GET]
 - Get the details of a product: '/products/:product_id' [GET]
-- Create a new product: '/products/create' [POST] [token required]
+- Create a new product: '/products' [POST] [token required]
 - [OPTIONAL] Top 5 most popular products 
 - [OPTIONAL] Products by category (args: product category)
 
