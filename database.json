@@ -1,0 +1,9 @@
+{
+    "dev": {
+        "driver": "pg",
+        "host": "127.0.0.1",
+        "database": "happy_tummy",
+        "user": "charliechoong",
+        "password": "ilovefood"
+    }
+}

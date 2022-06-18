@@ -13,6 +13,25 @@ Your application must make use of the following libraries:
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 
+## Running the Code
+1. Ensure Docker is installed and running.
+2. Fill up .env file with database details. (DB_USER so have default role, container_name for custom name)
+3. Navigate to project folder and run ```docker-compose up``` on terminal.
+4. install dotenv & db-migrate
+Connect to container on CLI: docker exec -it happy-tummy bash
+We have root access now
+su postgres -> psql 
+- create database, eg. CREATE DATABASE happytummy;
+- create user/pass eg.  CREATE USER charliechoong WITH PASSWORD 'ilovefood';
+- grant privileges to user eg. GRANT ALL PRIVILEGES ON DATABASE happytummy to charliechoong;
+Migration
+- npm install -g yarn
+- npm install -g db-migrate db-migrate-pg
+- yarn add db-migrate db-migrate-pg (because installed globally, not added in package.json?)
+- create database.json file
+- db-migrate create users-table --sql-file. repeat for all tables
+- edit db-migrate up/down files
+
 ## Steps to Completion
 
 ### 1. Plan to Meet Requirements
