@@ -33,6 +33,10 @@ Migration
 - db-migrate create users-table --sql-file. repeat for all tables
 - edit db-migrate up/down files
 
+Encrypt password
+- yarn add bcrpyt
+- create env variable: BCRYPT_PASSWORD=<pass> SALT_ROUNDS=10 
+
 ## Steps to Completion
 
 ### 1. Plan to Meet Requirements

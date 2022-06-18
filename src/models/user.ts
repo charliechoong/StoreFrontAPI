@@ -1,14 +1,20 @@
 // @ts-ignore
 import client from "../../database"
+import bcrypt from "bcrypt"
+import dotenv from "dotenv"
+
+dotenv.config()
+const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env
 
 export type User = {
     id: number;
     firstName: string;
     lastName: string;
-    password: string;
+    password_raw: string;
 }
 
 export class Users {
+    
     async index(): Promise<User[]> {
         try {
             const conn = await client.connect()
@@ -37,14 +43,17 @@ export class Users {
 
     async create(u: User): Promise<User> {
         try {
+            dotenv.config()
+            
             const conn = await client.connect()
             const sql = 'INSERT INTO users (firstName, lastName, password) VALUES(($1), ($2), ($3)) RETURNING *'
 
-            const result = conn.query(sql, [u.firstName, u.lastName, u.password])
+            const password_hash = bcrypt.hashSync(u.password_raw + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS||"1"))
+            const result = conn.query(sql, [u.firstName, u.lastName, password_hash])
             conn.release()
             return (await result).rows[0]
         } catch (err) {
-            throw new Error(`Could not create new user. Error: ${err}`)
+            throw new Error(`Could not create user ${u.firstName}. Error: ${err}`)
         }
     }
 }
