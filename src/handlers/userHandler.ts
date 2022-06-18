@@ -33,11 +33,12 @@ const create = async (req: Request, res: Response): Promise<void> => {
 }
 
 // const userRoutes = (app: express.Application) => {
-//     console.log(app)
 //     app.get('/users', index)
 //     app.get('/users/:id', show)
 //     app.post('/users', create)
 // }
 userRoutes.get('/users', index)
+userRoutes.get('/users/:id', show)
+userRoutes.post('/users', create)
 
 export default userRoutes

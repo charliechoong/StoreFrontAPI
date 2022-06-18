@@ -1,5 +1,5 @@
 // @ts-ignore
-import client from '../../database'
+import client from '../database'
 
 export type Order = {
     id: number;
