@@ -6,9 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const user_1 = require("../models/user");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const utilities_1 = require("../utilities");
 dotenv_1.default.config();
+const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env;
 const store = new user_1.UserStore();
 const userRoutes = (0, express_1.Router)();
 // route handlers
@@ -25,7 +27,7 @@ const create = async (req, res) => {
         const user = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            password_raw: req.body.password_raw,
+            password_hash: bcrypt_1.default.hashSync(req.body.password_raw + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS || "1"))
         };
         const newUser = await store.create(user);
         // Create and return JWT token for user

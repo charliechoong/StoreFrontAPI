@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserStore = void 0;
 // @ts-ignore
 const database_1 = __importDefault(require("../database"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env;
@@ -39,8 +38,7 @@ class UserStore {
         try {
             const conn = await database_1.default.connect();
             const sql = 'INSERT INTO users (firstName, lastName, password_digest) VALUES(($1), ($2), ($3)) RETURNING *';
-            const password_hash = bcrypt_1.default.hashSync(u.password_raw + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS || "1"));
-            const result = await conn.query(sql, [u.firstName, u.lastName, password_hash]);
+            const result = await conn.query(sql, [u.firstName, u.lastName, u.password_hash]);
             conn.release();
             return result.rows[0];
         }

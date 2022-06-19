@@ -1,9 +1,9 @@
 import { Order, OrderStore } from '../../models/order'
+import { User, UserStore } from '../../models/user'
 
 const store = new OrderStore()
 
 describe('Order Store', () => {
-
     it('should have a show method', () => {
         expect(store.show).toBeDefined()
     })
@@ -11,4 +11,10 @@ describe('Order Store', () => {
     it('should have a create method', () => {
         expect(store.create).toBeDefined()
     })
+
+    // Doesn't work
+    // it('should fail to create a new order and throw an error', async () => {
+
+    //     expect(function() { store.create({ userId: 1000, status: 'active'})}).toThrowError()
+    // })
 })

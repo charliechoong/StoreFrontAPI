@@ -9,4 +9,7 @@ describe('Order Store', () => {
     it('should have a create method', () => {
         expect(store.create).toBeDefined();
     });
+    it('should fail to create a new order and throw an error', async () => {
+        expect(function () { store.create({ userId: 1000, status: 'active' }); }).toThrowError();
+    });
 });

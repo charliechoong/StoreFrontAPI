@@ -7,7 +7,7 @@ export type Order = {
 }
 
 export class OrderStore {
-    async show(id: string): Promise<Order> {
+    async show(id: string) {
         try {
             const sql = 'SELECT * FROM orders WHERE id=($1)'
             const conn = await client.connect()
@@ -20,9 +20,9 @@ export class OrderStore {
         }
     }
 
-    async create(order: Order): Promise<Order> {
+    async create(order: Order) {
         try {
-            const sql = 'INSERT INTO orders (userId, status) VALUES (($1), ($2))'
+            const sql = 'INSERT INTO orders (user_id, status) VALUES (($1), ($2))'
             const conn = await client.connect()
             const result = await conn.query(sql, [order.userId, order.status])
             conn.release()

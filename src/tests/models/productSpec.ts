@@ -11,6 +11,10 @@ describe('Product Model', () => {
         expect(store.show).toBeDefined()
     })
 
+    it('should have a create method', () => {
+        expect(store.create).toBeDefined()
+    })
+
     it('create method should add a product', async () => {
         const product: Product = {
             name: 'Apple',
