@@ -1,10 +1,16 @@
 import express, { Request, Response, Router as router } from 'express'
 import { User, UserStore } from '../models/user'
 import jwt from "jsonwebtoken"
+import bcrypt from 'bcrypt'
 import dotenv from "dotenv"
 import { authenticate } from '../utilities'
 
 dotenv.config()
+
+const {
+    BCRYPT_PASSWORD,
+    SALT_ROUNDS
+} = process.env
 
 const store = new UserStore()
 
@@ -29,7 +35,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
         const user: User = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            password_raw: req.body.password_raw,
+            password_hash: bcrypt.hashSync(req.body.password_raw + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS||"1"))
         }
         const newUser = await store.create(user)
 
