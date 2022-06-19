@@ -15,11 +15,21 @@ describe('Product Model', () => {
             price: '0.7'
         };
         const result = await store.create(product);
+        expect(result).toEqual({
+            id: 1,
+            name: 'Apple',
+            price: '0.7'
+        });
         expect(result.name).toEqual('Apple');
         expect(result.price).toEqual('0.7');
     });
     it('index method should return a list of products', async () => {
         const result = await store.index();
         expect(result.length).toEqual(1);
+        expect(result).toEqual([{
+                id: 1,
+                name: 'Apple',
+                price: '0.7'
+            }]);
     });
 });
