@@ -42,7 +42,6 @@ export class UserStore {
 
     async create(u: User): Promise<User> {
         try {
-            dotenv.config()
             const conn = await client.connect()
             const sql = 'INSERT INTO users (firstName, lastName, password_digest) VALUES(($1), ($2), ($3)) RETURNING *'
 
@@ -50,7 +49,7 @@ export class UserStore {
             const result = await conn.query(sql, [u.firstName, u.lastName, password_hash])
             conn.release()
             
-            return {firstName:'b', lastName:'c', password_raw: 'password'} //result.rows[0]
+            return result.rows[0]
         } catch (err) {
             throw new Error(`Could not create user ${u.firstName}. Error: ${err}`)
         }

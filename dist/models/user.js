@@ -37,7 +37,6 @@ class UserStore {
     }
     async create(u) {
         try {
-            dotenv_1.default.config();
             const conn = await database_1.default.connect();
             const sql = 'INSERT INTO users (firstName, lastName, password_digest) VALUES(($1), ($2), ($3)) RETURNING *';
             const password_hash = bcrypt_1.default.hashSync(u.password_raw + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS || "1"));

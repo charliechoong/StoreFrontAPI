@@ -1,6 +1,7 @@
 import { json } from 'body-parser'
 import express, { Request, Response, Router as router } from 'express'
-import { ProductStore } from '../models/product'
+import { Product, ProductStore } from '../models/product'
+import { authenticate } from '../utilities'
 
 const productRoutes = router()
 const productStore = new ProductStore()
@@ -25,11 +26,16 @@ const show = async (req: Request, res: Response): Promise<void> => {
 }
 
 const create = async (req: Request, res: Response): Promise<void> => {
+    // Authenticate user
+    authenticate(req, res)
+
     try {
-        const newProduct = await productStore.create({
+        const product: Product = {
             name: req.body.name,
-            price: Number(req.body.price)
-        })
+            price: req.body.price
+        }
+        
+        const newProduct = await productStore.create(product)
         res.json(newProduct)
     } catch (err) {
         res.status(400).json(err)

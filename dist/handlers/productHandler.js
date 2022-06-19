@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const product_1 = require("../models/product");
+const utilities_1 = require("../utilities");
 const productRoutes = (0, express_1.Router)();
 const productStore = new product_1.ProductStore();
 const index = async (req, res) => {
@@ -24,11 +25,14 @@ const show = async (req, res) => {
     }
 };
 const create = async (req, res) => {
+    // Authenticate user
+    (0, utilities_1.authenticate)(req, res);
     try {
-        const newProduct = await productStore.create({
+        const product = {
             name: req.body.name,
-            price: Number(req.body.price)
-        });
+            price: req.body.price
+        };
+        const newProduct = await productStore.create(product);
         res.json(newProduct);
     }
     catch (err) {
