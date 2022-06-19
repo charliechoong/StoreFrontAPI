@@ -23,7 +23,7 @@ The app runs on port 3000 while the database runs on port 5432.
 3. Run the command:
 ```npm run test```
 
-## Running the Code (v2)
+## Running the Code (v2: For Docker in future)
 The app runs on port 3000 while the database runs on port 5432.
 1. Ensure Docker is installed and running.
 2. Fill up .env file with database details. (DB_USER so have default role, container_name for custom name)
