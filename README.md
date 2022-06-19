@@ -5,7 +5,6 @@
 This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
 
 ## Required Technologies
-Your application must make use of the following libraries:
 - Postgres for the database
 - Node/Express for the application logic
 - dotenv from npm for managing environment variables
@@ -14,6 +13,18 @@ Your application must make use of the following libraries:
 - jasmine from npm for testing
 
 ## Running the Code
+The app runs on port 3000 while the database runs on port 5432.
+1. npm i
+2. npm run start
+
+## Testing 
+1. Create test database
+2. Grant all database permissions to user
+3. Run the command:
+```npm run test```
+
+## Running the Code (v2)
+The app runs on port 3000 while the database runs on port 5432.
 1. Ensure Docker is installed and running.
 2. Fill up .env file with database details. (DB_USER so have default role, container_name for custom name)
 3. Navigate to project folder and run ```docker-compose up``` on terminal.
@@ -36,6 +47,13 @@ Migration
 Encrypt password
 - yarn add bcrpyt
 - create env variable: BCRYPT_PASSWORD=<pass> SALT_ROUNDS=10
+
+Authentication
+- Token added in Header for both GET and POST APIs
+
+Testing
+- Create test database locally 
+- Grant all privileges to user
 
 To Run:
 npm i
@@ -81,3 +99,6 @@ Add JWT functionality as shown in the course. Make sure that JWTs are required f
 Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
 
 Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+
+Questions:
+- How to prevent id frm being incremented when insertion fails? Since this will affect repeated testing. Solution: Test reset

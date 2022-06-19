@@ -8,13 +8,11 @@ const orderProductRoutes = router()
 
 // route handlers
 const indexOrderId = async (req: Request, res: Response): Promise<void> => {
-    // Authenticate user
-    authenticate(req, res)
     
     const order = await store.indexOrderId(req.params.id)
     res.json(order)
 }
 
-orderProductRoutes.get('/orders/:id', indexOrderId)
+orderProductRoutes.get('/orders/:id', authenticate, indexOrderId)
 
 export default orderProductRoutes

@@ -25,8 +25,6 @@ const show = async (req, res) => {
     }
 };
 const create = async (req, res) => {
-    // Authenticate user
-    (0, utilities_1.authenticate)(req, res);
     try {
         const product = {
             name: req.body.name,
@@ -41,5 +39,5 @@ const create = async (req, res) => {
 };
 productRoutes.get('/products', index);
 productRoutes.get('/products/:id', show);
-productRoutes.post('/products', create);
+productRoutes.post('/products', utilities_1.authenticate, create);
 exports.default = productRoutes;

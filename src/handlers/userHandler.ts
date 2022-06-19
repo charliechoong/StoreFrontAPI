@@ -12,24 +12,18 @@ const userRoutes = router()
 
 // route handlers
 const index = async (req: Request, res: Response): Promise<void> => {
-    // Authenticate user
-    authenticate(req, res)
 
     const users = await store.index()
     res.json(users)
 }
 
 const show = async (req: Request, res: Response): Promise<void> => {
-    // Authenticate user
-    authenticate(req, res)
 
     const user = await store.show(req.params.id)
     res.json(user)
 }
 
 const create = async (req: Request, res: Response): Promise<void> => {
-    // Authenticate user
-    authenticate(req, res)
 
     try {
         const user: User = {
@@ -44,8 +38,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
         res.json(token)
 
     } catch (err) {
-        res.status(400)
-        res.json(err)
+        res.status(400).json(err)
     }
 }
 
@@ -54,8 +47,8 @@ const create = async (req: Request, res: Response): Promise<void> => {
 //     app.get('/users/:id', show)
 //     app.post('/users', create)
 // }
-userRoutes.get('/users', index)
-userRoutes.get('/users/:id', show)
-userRoutes.post('/users', create)
+userRoutes.get('/users', authenticate, index)
+userRoutes.get('/users/:id', authenticate, show)
+userRoutes.post('/users', authenticate, create)
 
 export default userRoutes

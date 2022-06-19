@@ -13,20 +13,14 @@ const store = new user_1.UserStore();
 const userRoutes = (0, express_1.Router)();
 // route handlers
 const index = async (req, res) => {
-    // Authenticate user
-    (0, utilities_1.authenticate)(req, res);
     const users = await store.index();
     res.json(users);
 };
 const show = async (req, res) => {
-    // Authenticate user
-    (0, utilities_1.authenticate)(req, res);
     const user = await store.show(req.params.id);
     res.json(user);
 };
 const create = async (req, res) => {
-    // Authenticate user
-    (0, utilities_1.authenticate)(req, res);
     try {
         const user = {
             firstName: req.body.firstName,
@@ -39,8 +33,7 @@ const create = async (req, res) => {
         res.json(token);
     }
     catch (err) {
-        res.status(400);
-        res.json(err);
+        res.status(400).json(err);
     }
 };
 // const userRoutes = (app: express.Application) => {
@@ -48,7 +41,7 @@ const create = async (req, res) => {
 //     app.get('/users/:id', show)
 //     app.post('/users', create)
 // }
-userRoutes.get('/users', index);
-userRoutes.get('/users/:id', show);
-userRoutes.post('/users', create);
+userRoutes.get('/users', utilities_1.authenticate, index);
+userRoutes.get('/users/:id', utilities_1.authenticate, show);
+userRoutes.post('/users', utilities_1.authenticate, create);
 exports.default = userRoutes;

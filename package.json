@@ -7,7 +7,7 @@
     "start": "nodemon src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "build": "npx tsc",
-    "test": "npm run build && npm run jasmine",
+    "test": "SET ENV=test && npm run build && db-migrate -e test up && jasmine && db-migrate -e test reset",
     "jasmine": "jasmine"
   },
   "author": "Udacity",

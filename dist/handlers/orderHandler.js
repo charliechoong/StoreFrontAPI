@@ -9,14 +9,10 @@ const orderProductStore = new order_products_1.OrderProductStore();
 const orderRoutes = (0, express_1.Router)();
 // route handlers
 const show = async (req, res) => {
-    // Authenticate user
-    (0, utilities_1.authenticate)(req, res);
     const order = await store.show(req.params.id);
     res.json(order);
 };
 const create = async (req, res) => {
-    // Authenticate user
-    (0, utilities_1.authenticate)(req, res);
     try {
         const order = {
             userId: Number(req.params.userId),
@@ -30,8 +26,6 @@ const create = async (req, res) => {
     }
 };
 const addProduct = async (req, res) => {
-    // Authenticate user
-    (0, utilities_1.authenticate)(req, res);
     try {
         const newProductOrder = await orderProductStore.addProduct(req.params.order_id, req.body.product_id, req.body.quantity);
         res.json(newProductOrder);
@@ -40,7 +34,7 @@ const addProduct = async (req, res) => {
         res.status(400).json(err);
     }
 };
-orderRoutes.get('/orders/:id?:token', show);
-orderRoutes.post('/orders', create);
-orderRoutes.post('/orders/:order_id/products', addProduct);
+orderRoutes.get('/orders/:id?:token', utilities_1.authenticate, show);
+orderRoutes.post('/orders', utilities_1.authenticate, create);
+orderRoutes.post('/orders/:order_id/products', utilities_1.authenticate, addProduct);
 exports.default = orderRoutes;

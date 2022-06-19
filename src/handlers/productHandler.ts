@@ -26,9 +26,6 @@ const show = async (req: Request, res: Response): Promise<void> => {
 }
 
 const create = async (req: Request, res: Response): Promise<void> => {
-    // Authenticate user
-    authenticate(req, res)
-
     try {
         const product: Product = {
             name: req.body.name,
@@ -44,6 +41,6 @@ const create = async (req: Request, res: Response): Promise<void> => {
 
 productRoutes.get('/products', index)
 productRoutes.get('/products/:id', show)
-productRoutes.post('/products', create)
+productRoutes.post('/products', authenticate, create)
 
 export default productRoutes
